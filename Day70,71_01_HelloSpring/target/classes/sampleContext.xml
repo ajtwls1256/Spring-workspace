@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<!-- 필요한 bean(객체) -->
+	<bean id="samsung" class="org.kh.spring.model.vo.SamsungTV"></bean>
+	<bean id="lg" class="org.kh.spring.model.vo.LgTV"></bean>
+
+	<!-- TVmgr 객체 생성 -->
+	<bean id="tvMgr" class="org.kh.spring.model.vo.TVmgr">
+	<!-- setter를 이용해서 TVmgr 객체의 tv변수에 SamsungTV 객체 삽입( ref에 있는 samsung이 위에 있는 id값 ) -->
+		<property name="tv" ref="lg"></property>
+	</bean>
+
+</beans>

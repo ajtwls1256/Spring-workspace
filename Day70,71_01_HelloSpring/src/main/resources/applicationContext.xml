@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<import resource="personContext.xml"/>
+	<import resource="sampleContext.xml"/>	
+
+
+	<bean id="data" class="org.kh.bean.test.TestData" scope="prototype">
+		<constructor-arg>
+			<value>100</value>
+		</constructor-arg>
+	</bean>
+	
+	
+	<bean id="listBean" class="org.kh.bean.test.CollectionBean">
+		<property name="nameList">
+			<list>
+				<value>배병축</value>
+				<value>이경필</value>
+				<value>권평택</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="setBean" class="org.kh.bean.test.CollectionSetBean">
+		<property name="nameList">
+			<set>
+				<value>평택시</value>
+				<value>평택군</value>
+				<value>평택면</value>
+				<value>평택시</value>	<!-- set 특성상 중복값이 안들어가는데 이렇게 넣으면 자동으로 안들어간다 -->
+			</set>
+		</property>
+	</bean>
+	
+	
+
+	
+	<bean id="mapBean" class="org.kh.bean.test.CollectionMapBean">
+		<property name="addressList">
+			<map>
+				<entry> <!-- entry는 key와 value를 쌍으로 하는 하나의 단위 -->
+					<key><value>권영상</value></key>
+					<value>평택시</value>
+				</entry>
+				<entry> 
+					<key><value>배병축</value></key>
+					<value>서울시</value>
+				</entry>	
+				<entry> 
+					<key><value>금명석</value></key>
+					<value>서울시</value>
+				</entry>			
+			</map>
+		</property>
+	</bean>
+	
+	
+</beans>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- 이거 bean생성하고 커넥션 만들때 입력했던 것들 설정함 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="mybatis"/>
+		<property name="password" value="1234"/>
+	</bean>
+	
+	<!-- 이 jdbcTemplate을 이용하여 우리가 기존에 싱글톤으로 만들어 사용하던 JDBCTemplate처럼 사용 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<!-- 위에서 만든거 속성값으로 넣어줌 -->
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+
+
+	<!-- AOP Bean방식 -->
+
+	<!-- 축 메시지 객체생성 -->
+<!-- 
+	<bean id="chooks" class="org.kh.member.common.BaeMessage"/>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(* org.kh.member.model.service..*Service.*(..))" id="log"/>
+		<aop:pointcut expression="execution(int org.kh.member.model.service..*Service.*(..))" id="returnInt"/>
+ 		<aop:aspect ref="chooks">
+			<aop:before method="printBaeMessage" pointcut-ref="log"/>
+		</aop:aspect>
+		<aop:aspect ref="chooks">	애스팩트의 참조는 id가 chooks인 bean객체
+			<aop:around method="aroundLog" pointcut-ref="returnInt"/> around 로 동작메소드는 aroundLog이고 참조하는포인트컷은 id가 returnInt이다.(위에서 만든거)
+		</aop:aspect>
+	</aop:config>
+
+ -->
+ 
+ 	<!-- beforeAdvice객체 생성 -->
+ 	<!-- <bean id="before" class="org.kh.member.common.BeforeAdvice"/>
+ 	
+ 	<aop:config>
+ 		<aop:pointcut expression="execution(* org.kh.member.model.service..*Service.*(..))" id="allPointcut"/>
+ 		<aop:pointcut expression="execution(int org.kh.member.model.service..*Service.*(..))" id="returnInt"/>
+ 		<aop:aspect ref="before">
+ 			<aop:before method="beforeLog" pointcut-ref="allPointcut"/>
+ 			
+ 		</aop:aspect>
+ 	</aop:config>
+ 	
+ 	
+  	afterReturningAdvice
+ 	<bean id="afterReturning" class="org.kh.member.common.AfterReturningAdvice"/>
+ 	
+ 	<aop:config>
+ 		<aop:aspect ref="afterReturning">
+			before와는 다르게 함수의 매개변수로 return된 object를 받기때문에 returning 옵션에 메소드 매개변수명을 써줘야한다. 매개변수에 return값 받는게없으면 안써도됨
+ 			<aop:after-returning method="afterLog" pointcut-ref="allPointcut" returning="returnObj"/>
+ 		</aop:aspect>
+ 	</aop:config>
+ 	
+ 	
+ 	
+ 	afterThrowingAdvice
+ 	<bean id="afterThrowing" class="org.kh.member.common.AfterThrowingAdvice"/>
+ 	
+ 	 <aop:config>
+ 		<aop:aspect ref="afterThrowing">
+			afterReturning과 동일하게 오류가 나면 받아주는 throwing옵션에 메소드 매개변수명을 넣어줘야함
+ 			<aop:after-throwing method="exceptionLog" pointcut-ref="allPointcut" throwing="exceptObj"/>
+ 		</aop:aspect>
+ 	</aop:config>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	Around를 이용한 메소드 수행시간 체크
+ 	<bean id="around" class="org.kh.member.common.AroundAdvice"/>
+ 	
+ 	 <aop:config>
+ 		<aop:aspect ref="around">
+ 			<aop:around method="aroundLog" pointcut-ref="allPointcut"/>
+ 		</aop:aspect>
+ 	</aop:config>
+ 	 -->
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<!-- AOP 어노테이션 방식 -->
+ 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+ 	
+ 	
+
+</beans>
